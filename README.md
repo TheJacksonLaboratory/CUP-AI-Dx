@@ -17,6 +17,12 @@ conda create -f conda.txt -n tcga-gpu
 Note that this requires the use of a computer system with NVIDIA GPUs and the
 appropriate CUDA libraries available.
 
+## Source data
+
+Before running, you need to `bunzip2` the datasets in the `data/` directory.
+
+To generate the data yourself from scratch, TBD.
+
 ## Running the primary classifier code
 
 To run the external validation with pre-built models from the script directory, you can do
@@ -37,6 +43,3 @@ python3 external_validation.py \
 
 TBD
 
-## Source data
-
-TBD
