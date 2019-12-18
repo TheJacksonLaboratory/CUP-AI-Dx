@@ -19,8 +19,7 @@ appropriate CUDA libraries available.
 
 ## Running the primary classifier code
 
-Currently, the only available code is external validation with pre-built
-models.  To run the external validation from the script directory, you can do
+To run the external validation with pre-built models from the script directory, you can do
 the following:
 ```
 python3 external_validation.py metastatic
