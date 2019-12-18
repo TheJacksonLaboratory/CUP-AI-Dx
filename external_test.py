@@ -77,7 +77,7 @@ if __name__ == "__main__":
     start_time = tt.time()
 
     model_files = {
-        "inception": f"{args.models_dir}/inception.h5",
+        "inception": f"{args.models_dir}/inception_net_1d.h5",
         "cnn": f"{args.models_dir}/cnn.h5",
         "resnet": f"{args.models_dir}/resnet.h5"
     }
