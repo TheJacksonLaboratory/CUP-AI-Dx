@@ -28,7 +28,7 @@ To generate the data yourself from scratch, TBD.
 To run the external validation with pre-built models from the script directory, you can do
 the following:
 ```
-python3 external_test.py metastatic
+python3 external_test.py metastatic --model <model-name>
 ```
 In general, this script accepts a few commandline arguments:
 ```
