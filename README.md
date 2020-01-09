@@ -12,9 +12,13 @@ Note that the program requires the use of a computer system with NVIDIA GPUs and
 appropriate CUDA libraries available.
 
 The python environment required to run these scripts is listed in `conda.txt`.
-You can recreate it with
+You can recreate the required environment with
 ```
 conda env create -f conda.yml -n tcga-gpu
+```
+To activate this environment, use
+```
+conda activate tcga-gpu
 ```
 
 ## Source data
@@ -41,7 +45,7 @@ python3 external_test.py \
     --model inception \ # default is `inception`
     --models-dir "path/to/models" \ # default is `$(pwd)/models`
 ```
-Once finished, the primary classifier will predict the overall accuracy and top5 accuracy on the screen directly. You can also check by class performacne and confusion matrix in the auto-generated `output/` folder.
+Once finished, the primary classifier will give the overall accuracy and top5 accuracy pridiction results on the screen directly. Other results including by class performance and confusion matrix are stored in the auto-generated `output/` directory.
 
 ## Running the subtype classifier code
 
