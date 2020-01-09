@@ -6,6 +6,7 @@ import argparse
 import time as tt
 import numpy as np
 import pandas as pd
+from pathlib import Path
 from keras.models import load_model
 from sklearn.metrics import confusion_matrix, classification_report
 from utils import reshape_data_1d, adjust_label, top_n_accuracy
@@ -20,13 +21,14 @@ def load_label_encodings(data_dir):
     return int_to_label, label_to_int
 
 
-def external_validation(x, y, data_set, keras_model):
+def external_validation(x, y, data_set, keras_model, output_dir=Path(".")):
     """Function to gauge model performance on external datasets
 
     :param x:
     :param y:
     :param data_set:
     :param keras_model:
+    :param output_dir:
     """
 
     # load the trained NN
@@ -39,7 +41,10 @@ def external_validation(x, y, data_set, keras_model):
     cm_labels = list(set(pred_labels) | set(y))
     cm_labels.sort()
 
-    confusion_file = f"Confusion_matrix_{data_set}.csv"
+    if not output_dir.exists():
+        output_dir.mkdir()
+
+    confusion_file = output_dir / f"Confusion_matrix_{data_set}.csv"
     _confusion_matrix = confusion_matrix(y, pred_labels, labels=cm_labels)
     pd.DataFrame(
         _confusion_matrix,
@@ -47,7 +52,7 @@ def external_validation(x, y, data_set, keras_model):
         columns=cm_labels
     ).to_csv(confusion_file)
 
-    report_file = f"By_Class_metric_{data_set}.txt"
+    report_file = output_dir / f"By_Class_metric_{data_set}.txt"
     with open(report_file, "w+") as f:
         report = classification_report(y, pred_labels, labels=cm_labels)
         f.write(report)
@@ -72,6 +77,7 @@ if __name__ == "__main__":
         choices=["inception", "cnn", "resnet"]
     )
     parser.add_argument("--models-dir", default="models")
+    parser.add_argument("--output-dir", default="output")
     args = parser.parse_args()
 
     start_time = tt.time()
@@ -89,6 +95,9 @@ if __name__ == "__main__":
     for dataset_name in args.datasets:
         external_X, external_Y = load_dataset(args.data_dir, dataset_name)
         test_x = reshape_data_1d(external_X)
-        external_validation(test_x, external_Y, dataset_name, keras_model)
+        external_validation(
+            test_x, external_Y, dataset_name, keras_model,
+            output_dir=Path(args.output_dir)
+        )
 
     print(f"--- {tt.time() - start_time} seconds ---")

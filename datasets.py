@@ -5,7 +5,12 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import LabelEncoder
 
 def load_metastatic_dataset(data_dir):
-    df_meta = pd.read_csv(f'{data_dir}/ExternalDataMeta.csv', index_col=0)
+    try:
+        df_meta = pd.read_csv(f'{data_dir}/ExternalDataMeta.csv', index_col=0)
+    except FileNotFoundError as err:
+        print("Cannot find external data---did you `bunzip2` it?")
+        raise err
+
     string_labels_meta = df_meta['tumor.type']
     df_meta = df_meta.drop(['tumor.type'], axis=1)
 
@@ -35,7 +40,7 @@ DATASETS = {
 
 def load_dataset(data_dir, data_set_name):
 
-    assert data_set_name in datasets.keys()
+    assert data_set_name in DATASETS.keys()
 
     print(f"Loading {data_set_name} data from {data_dir}")
-    return datasets[data_set_name](data_dir)
+    return DATASETS[data_set_name](data_dir)
