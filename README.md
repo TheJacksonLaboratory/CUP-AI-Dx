@@ -8,18 +8,21 @@ local machine for development and testing purposes.
 
 ## Prerequisites
 
+Note that the program requires the use of a computer system with NVIDIA GPUs and the
+appropriate CUDA libraries available.
+
 The python environment required to run these scripts is listed in `conda.txt`.
 You can recreate it with
 ```
 conda env create -f conda.yml -n tcga-gpu
 ```
 
-Note that this requires the use of a computer system with NVIDIA GPUs and the
-appropriate CUDA libraries available.
-
 ## Source data
 
 Before running, you need to `bunzip2` the datasets in the `data/` directory.
+```
+bzip2 -kd data/ExternalDataMeta.csv.bz2
+ ```
 
 To generate the data yourself from scratch, TBD.
 
@@ -38,6 +41,7 @@ python3 external_test.py \
     --model inception \ # default is `inception`
     --models-dir "path/to/models" \ # default is `$(pwd)/models`
 ```
+Once finished, the primary classifier will predict the overall accuracy and top5 accuracy on the screen directly. You can also check by class performacne and confusion matrix in the auto-generated `output/` folder.
 
 ## Running the subtype classifier code
 
