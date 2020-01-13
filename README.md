@@ -48,6 +48,16 @@ python3 external_test.py \
 Once finished, the primary classifier will give the overall accuracy and top5 accuracy pridiction results on the screen directly. Other results including by class performance and confusion matrix are stored in the auto-generated `output/` directory.
 
 ## Running the subtype classifier code
+For breast cancer validation, please run:
 
-TBD
+```
+Rscript run_subtype_validation.R breast_cancer <output-dir>
+```
+
+For ovarian validation data, please run:
+```
+Rscript run_subtype_validation.R ovarian_cancer <output-dir>
+```
+
+
 
