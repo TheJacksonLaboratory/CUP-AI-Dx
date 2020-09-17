@@ -1,6 +1,6 @@
-# ai4cancer
+# CUP-AI-Dx
 
-Description Placeholder
+CUP-AI-Dx is a deep-learning tool to infer a tumor's primary tissue of origin from its transcriptional signature.
 
 ## Getting Started
 These instructions will get you a copy of the project up and running on your
