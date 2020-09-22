@@ -59,8 +59,9 @@ For ovarian validation data, please run:
 Rscript run_subtype_validation.R ovarian_cancer <output-dir>
 ```
 
-A docker container has been built so that the users can use the tool easily. The code should be runnable on any machine as long as docker is installed.
+## Running new data set prediction on a docker container
 
+A docker container has been built so that the users can use the tool easily. The code should be runnable on any machine as long as docker is installed. Especially no package installation is required.
 
 After installing docker, please run the following command in the terminal to pull the container from dockerhub:
 
