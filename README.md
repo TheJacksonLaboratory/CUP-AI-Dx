@@ -59,5 +59,37 @@ For ovarian validation data, please run:
 Rscript run_subtype_validation.R ovarian_cancer <output-dir>
 ```
 
+A docker container has been built so that the users can use the tool easily. The code should be runnable on any machine as long as docker is installed.
+
+
+After installing docker, please run the following command in the terminal to pull the container from dockerhub:
+
+```
+docker pull yuz12012/ai4cancer:product
+docker run -it yuz12012/ai4cancer:product
+```
+
+After container loads (probably you will see something like '(base) [root@9f6c7ef6f851 /]'), please do the following in the container:
+
+```
+conda activate tf-cpu
+cd /scripts/
+python RunPrediction.py --data_set=data/ExternalDataMeta.csv
+```
+
+where the 'data/ExternalDataMeta.csv' represents the new data file to predict. The data file is a csv file with the columns names of 'X' + entrez gene ids. The order doesn't matter since code will rearrange the columns based on a feature column (saved in data/features_40_median_icgc_tcga.csv of the container) predefined. 
+But please include all the genes in the feature csv file.
+
+The prediction should take seconds and the cancer label predicted and probabilities of each prediction are saved in 'output/prediction_<data-file-name>.csv' and 'output/prediction_prob_<data-file-name>.csv' respectively.
+For example, the output from the example command will be 'prediction_data_ExternalDataMeta.csv' and 'prediction_prob_data_ExternalDataMeta.csv'.
+
+Good luck and have fun.
+
+
+
+
+
+
+
 
 
